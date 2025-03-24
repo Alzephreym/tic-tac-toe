@@ -9,168 +9,235 @@
     font-family: 'Poppins', sans-serif;
 }
 
-/* Style du corps avec fond bleu uniforme */
+/* Corps de la page avec fond animé en 3D */
 body {
     display: flex;
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background-color: #3498db; /* Bleu uniforme */
+    background: linear-gradient(45deg, #2c3e50, #0d0d0d);
+    color: #e0e0e0;
     overflow: hidden;
     flex-direction: column;
-    
+    position: relative;
+    text-align: center;
+    font-weight: 300;
+    perspective: 1000px; /* Pour des animations en 3D */
 }
 
-/* Style du tableau de scores */
+/* Fond Pokémon GIF avec effet high-tech et flou 3D */
+body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('pokemon.gif');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: -1;
+    opacity: 0.6;
+    filter: blur(15px) brightness(0.5);
+    animation: pulseBackground 12s ease-in-out infinite;
+}
+
+/* Animation du fond */
+@keyframes pulseBackground {
+    0% { filter: blur(5px) brightness(0.4); }
+    50% { filter: blur(10px) brightness(0.7); }
+    100% { filter: blur(5px) brightness(0.4); }
+}
+
+/* Effet glitch sur le titre sans rotation */
+h1 {
+    font-size: 4rem;
+    color: #FFD700;
+    text-align: center;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 0.8), 0 0 15px rgba(255, 215, 0, 1), 0 0 25px rgba(0, 255, 255, 1), 0 0 40px rgba(0, 255, 255, 0.6);
+    letter-spacing: 3px;
+}
+
+/* Tableau de scores avec effets de néon et lumière 3D */
 .scoreboard {
     display: flex;
     justify-content: space-between;
     width: 100%;
     padding: 0 40px;
     margin-bottom: 30px;
+    text-shadow: 0 0 10px rgba(255, 255, 255, 0.6);
+    border-bottom: 3px solid rgba(255, 215, 0, 0.8);
+    position: relative;
+    z-index: 10;
 }
 
 .player1, .player2 {
-    font-size: 1.5em;
+    font-size: 2.5em;
     color: #fff;
+    font-weight: 600;
+    text-shadow: 0 0 5px rgba(255, 255, 255, 0.6), 0 0 20px rgba(0, 255, 255, 0.8);
 }
 
-.player1 span, .player2 span {
-    margin-right: 10px;
-}
-
-/* Score avec l'effet lll */
 .score {
-    font-size: 1.5em;
-    font-weight: 700;
-    letter-spacing: 2px;
+    font-size: 3em;
+    font-weight: 800;
+    letter-spacing: 4px;
+    color: #FFD700;
+    text-shadow: 0 0 30px rgba(255, 215, 0, 1);
+    transform: perspective(500px) rotateX(0deg);
+    animation: scorePulse 2s ease-out infinite alternate;
 }
 
-/* Style du tableau de jeu */
+@keyframes scorePulse {
+    0% { text-shadow: 0 0 30px rgba(255, 215, 0, 0.7); }
+    100% { text-shadow: 0 0 50px rgba(255, 215, 0, 1); }
+}
+
+/* Style du tableau de jeu avec cellules futuristes et ombre dynamique */
 .game-board {
     display: grid;
-    grid-template-columns: repeat(3, 100px);
-    grid-template-rows: repeat(3, 100px);
-    gap: 5px;
+    grid-template-columns: repeat(3, 120px);
+    grid-template-rows: repeat(3, 120px);
+    gap: 15px;
     justify-content: center;
     margin: 20px auto;
+    position: relative;
 }
 
 .cell {
-    width: 100px;
-    height: 100px;
+    width: 120px;
+    height: 120px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 3em;
-    border: 2px solid #2c4766;
+    font-size: 4em;
+    border: 3px solid #3b4cca;
     cursor: pointer;
-    background-color: #2c4766;
-    transition: 0.3s ease;
+    background: linear-gradient(45deg, #212f3d, #3b4cca);
+    transition: all 0.3s ease;
     position: relative;
     color: white;
+    box-shadow: 0 0 25px rgba(0, 255, 255, 0.8);
+    border-radius: 15px;
+    transform: scale(1);
+    animation: scaleEffect 1.5s ease-out infinite alternate;
+}
+
+@keyframes scaleEffect {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.1); }
 }
 
 .cell ion-icon {
-    font-size: 3em;
+    font-size: 4em;
 }
 
-/* Hover sur les cases */
 .cell:hover {
-    background-color: #0ef;
-    transform: scale(1.1);
+    background-color: #00ffff;
+    transform: scale(1.2);
+    box-shadow: 0 0 40px rgba(0, 255, 255, 1);
+    animation: hoverPulse 1.5s ease-out infinite alternate;
 }
 
-/* Status (tour du joueur) */
+@keyframes hoverPulse {
+    0% { transform: scale(1.1); }
+    100% { transform: scale(1.2); }
+}
+
+/* Status avec un effet lumineux de type "holographique" */
 .status {
     margin: 20px;
-    font-size: 1.5em;
+    font-size: 1.8em;
     color: #fff;
     text-align: center;
+    text-shadow: 0 0 20px rgba(0, 255, 255, 0.8), 0 0 10px rgba(0, 0, 255, 0.5);
+    letter-spacing: 1.5px;
 }
 
-/* Notification de victoire */
+/* Notification de victoire avec effet holographique et pulsation */
 .notification {
     position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background: rgba(0, 0, 0, 0.8);
+    background: rgba(0, 0, 0, 0.9);
     color: #fff;
-    padding: 20px 40px;
-    border-radius: 12px;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    padding: 25px 50px;
+    border-radius: 20px;
+    box-shadow: 0 4px 30px rgba(0, 255, 255, 0.9);
     text-align: center;
     display: none;
+    border: 4px solid #FFD700;
+    animation: pulseNotification 2s ease-in-out infinite;
+}
+
+@keyframes pulseNotification {
+    0% { box-shadow: 0 0 25px rgba(0, 255, 255, 0.7); }
+    50% { box-shadow: 0 0 40px rgba(0, 255, 255, 1); }
+    100% { box-shadow: 0 0 25px rgba(0, 255, 255, 0.7); }
 }
 
 .notification h3 {
-    font-size: 2em;
-    margin-bottom: 20px;
+    font-size: 2.5rem;
+    margin-bottom: 25px;
 }
 
-/* Bouton "Revanche" */
+/* Bouton "Revanche" avec effet de néon dynamique */
 .rematch {
-    padding: 12px 24px;
-    font-size: 1.2em;
+    padding: 18px 36px;
+    font-size: 1.5em;
     cursor: pointer;
     border: none;
-    background-color: #28a745;
+    background: linear-gradient(45deg, #28a745, #1f8f3a);
     color: white;
-    border-radius: 40px;
+    border-radius: 50px;
     margin-top: 20px;
-    transition: 0.3s ease;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    display: inline-block;
-    font-weight: 600;
+    transition: 0.5s ease;
+    box-shadow: 0 0 25px rgba(0, 255, 0, 0.8);
+    font-weight: 700;
+    text-shadow: 0 0 10px rgba(255, 215, 0, 1);
 }
 
 .rematch:hover {
     background-color: #1f8f3a;
-    transform: scale(1.05);
+    transform: scale(1.15);
+    box-shadow: 0 0 40px rgba(0, 255, 0, 1);
 }
 
-/* Mise en forme des boutons et des autres éléments */
-button {
-    padding: 15px;
-    font-size: 1.2em;
-    border: none;
+/* Barre de recherche futuriste avec bord lumineux */
+#search-bar {
+    margin: 20px 0;
+    width: 360px;
+    padding: 16px;
+    font-size: 20px;
+    border: 3px solid #FFD700;
+    border-radius: 30px;
+    text-align: center;
+    background: rgba(0, 0, 0, 0.9);
+    color: #FFD700;
+    box-shadow: 0 0 25px rgba(255, 215, 0, 0.8);
+    transition: all 0.4s ease;
+    outline: none;
+}
+
+#search-bar:focus {
+    width: 380px;
+    background: rgba(0, 0, 0, 1);
+    box-shadow: 0 0 35px rgba(255, 215, 0, 1);
+}
+
+/* Cartes Pokémon avec effet néon et futuriste */
+.pokemon-wrapper {
+    text-align: center;
+    margin: 20px;
+    padding: 20px;
+    border: 3px solid #3b4cca;
+    border-radius: 20px;
     background: rgba(255, 255, 255, 0.1);
-    color: #fff;
-    cursor: pointer;
-    border-radius: 10px;
-    transition: all 0.3s ease;
-    box-shadow: 0px 5px 10px rgba(0, 0, 0, 0.3);
-}
-
-button:hover {
-    background: #0ef;
-    color: #1f293a;
-    transform: scale(1.1);
-}
-
-button:active {
-    background: #ccc;
-}
-
-/* Espacement et couleur des scores */
-.scoreboard {
-    margin-top: 20px;
-}
-
-.player1, .player2 {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-}
-
-.scoreboard .score {
-    font-size: 2em;
-    font-weight: bold;
-    letter-spacing: 1px;
-}
-
-/* Titre du jeu */
-h1 {
-    color: #56abd9; /* Bleu foncé */
+    box-shadow: 0 0 25px rgba(59, 76, 202, 1);
+    backdrop-filter: blur(5px);
+    transition: transform 0.5s ease, box-shadow 0.5s ease;
+    position: relative;
 }
